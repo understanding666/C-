@@ -202,33 +202,55 @@ public:
 //主函数测试
 int main()
 {
-    //1.创建题库
-    QuestionBank bank("三角形几何题库");
+    QuestionBank bank;
+    int choice;
+    int id;
+    double a,b,c;
 
-    //2.创建2道三角形题目，加入题库
-    TriangleQuestion q1(1,3,4,5);
-    TriangleQuestion q2(2,2,2,2);
-    bank.addQuestion(q1);
-    bank.addQuestion(q2);
+    while(true)
+    {
+        cout << "\n=====三角形题库菜单=====\n";
+        cout << "1.新增三角形题目\n";
+        cout << "2.按题号查询题目\n";
+        cout << "3.按题号删除题目\n";
+        cout << "4.显示全部题库\n";
+        cout << "0.退出程序\n";
+        cout << "请输入你的选择：";
+        cin >> choice;
 
-    //3.用户做第1题，输入答案
-    q1.setUserAnswer(6);
-    bank.addScore(10); //满分10分
-
-    //4.用户做第2题
-    q2.setUserAnswer(1.732);
-    bank.addScore(10);
-
-    //5.查询题号1
-    cout << "查询题号1："<<endl;
-    bank.searchQuestion(1);
-
-    //6.显示整个题库信息
-    bank.showBankInfo();
-
-    //7.删除题号2
-    bank.delQuestion(2);
-    bank.showBankInfo();
-
+        if(choice == 0)
+        {
+            cout << "程序结束\n";
+            break;
+        }
+        else if(choice == 1)
+        {
+            cout << "请输入题号，三边a b c：";
+            cin >> id >> a >> b >> c;
+            TriangleQuestion t(id,a,b,c);
+            bank.addQuestion(t);
+            cout << "添加成功！" << endl;
+        }
+        else if(choice == 2)
+        {
+            cout << "请输入要查询的题号：";
+            cin >> id;
+            bank.searchQuestion(id);
+        }
+        else if(choice ==3)
+        {
+            cout << "请输入要删除的题号：";
+            cin >> id;
+            bank.delQuestion(id);
+        }
+        else if(choice ==4)
+        {
+            bank.showBankInfo();
+        }
+        else
+        {
+            cout << "输入选项无效，请重新选择！\n";
+        }
+    }
     return 0;
 }
